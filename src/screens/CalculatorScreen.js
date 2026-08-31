@@ -1,9 +1,93 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, useState } from 'react-native';
 
 import { CalculatorButton } from '../components/CalculatorButton';
 
 export function CalculatorScreen() {
-    const display = '0';
+    const [display, setDisplay] = useState('0');
+    const [storedValue, setStoredValue] = useState(null);
+    const [operator, setOperator] = useState(null);
+    const [shouldResetDisplay, setShouldResetDisplay] = useState(false);
+
+    function handleInputNumber(value) {
+        if (shouldResetDisplay) {
+            setDisplay(value);
+            setShouldResetDisplay(false);
+            return;
+        }
+
+        setDisplay((current) => (current === '0' ? value : current + value))
+    }
+    
+    function handleInputDecimal() {
+        if (shouldResetDisplay) {
+            setDisplay('0.');
+            setShouldResetDisplay(false);
+            return;
+        }
+
+        if (!display.includes('.')) {
+            setDisplay(display + '.');
+        }
+    }
+    
+    function handleClearDisplay() {
+        setDisplay('0');
+        setStoredValue(null);
+        setOperator(null);
+        setShouldResetDisplay(false);
+    }
+    
+    function handleToggleSign() {
+        setDisplay((current) => current.startsWith('-') ? current.slice(1) : `-${current}`);
+    }
+
+    function handlePercentage() {
+        setDisplay((current) => String(parseFloat(current) / 100));
+    }
+
+    function handleCalculate(firstValue, secondValue, currentOperator) {
+        switch(currentOperator) {
+            case '+':
+                return firstValue + secondValue;
+            case '-':
+                return firstValue - secondValue;
+            case '×':
+                return firstValue * secondValue;
+            case '÷':
+                return secondValue === 0 ? 'Error' : firstValue / secondValue;
+            default:
+                return secondValue;
+        }
+    }
+
+    function handleChooseOperator(nextOperator) {
+        const currentValue = parseFloat(display);
+
+        if (operator && storedValue !== null && !shouldResetDisplay) {
+            const result = calculate(storedValue, currentValue, operator);
+
+            setDisplay(String(result));
+            setStoredValue(typeof result === 'number' ? result : null);
+        } else {
+            setStoredValue(currentValue);
+        }
+
+        setOperator(nextOperator);
+        setShouldResetDisplay(true);
+    }
+
+    function handleResolveCalculation() {
+        if (!operator || storedValue === null) {
+            return;
+        }
+
+        const result = calculate(storedValue, parseFloat(display), operator);
+
+        setDisplay(String(result));
+        setStoredValue(null);
+        setOperator(null);
+        setShouldResetDisplay(true);
+    }
     
     return (
         <SafeAreaView style={styles.container}>
