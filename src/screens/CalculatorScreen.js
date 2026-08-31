@@ -1,4 +1,5 @@
-import { SafeAreaView, StyleSheet, Text, View, useState } from 'react-native';
+import { useState } from 'react';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import { CalculatorButton } from '../components/CalculatorButton';
 
@@ -98,33 +99,33 @@ export function CalculatorScreen() {
             </View>
             <View style={styles.keyboard}>
                 <View style={styles.row}>
-                    <CalculatorButton label="AC" variant='function' />
-                    <CalculatorButton label="+/-" variant='function' />
-                    <CalculatorButton label="%" variant='function' />
-                    <CalculatorButton label="÷" variant='operator' />
+                    <CalculatorButton label="AC" variant='function' onPress={handleClearDisplay} />
+                    <CalculatorButton label="+/-" variant='function' onPress={handleToggleSign} />
+                    <CalculatorButton label="%" variant='function' onPress={handlePercentage} />
+                    <CalculatorButton label="÷" variant='operator' onPress={() => handleChooseOperator('÷')} />
                 </View>
                 <View style={styles.row}>
-                    <CalculatorButton label="7" />
-                    <CalculatorButton label="8" />
-                    <CalculatorButton label="9" />
-                    <CalculatorButton label="×" variant='operator' />
+                    <CalculatorButton label="7" onPress={() => handleInputNumber('7')} />
+                    <CalculatorButton label="8" onPress={() => handleInputNumber('8')} />
+                    <CalculatorButton label="9" onPress={() => handleInputNumber('9')} />
+                    <CalculatorButton label="×" variant='operator' onPress={() => handleChooseOperator('×')} />
                 </View>
                 <View style={styles.row}>
-                    <CalculatorButton label="4" />
-                    <CalculatorButton label="5" />
-                    <CalculatorButton label="6" />
-                    <CalculatorButton label="-" variant='operator' />
+                    <CalculatorButton label="4" onPress={() => handleInputNumber('4')} />
+                    <CalculatorButton label="5" onPress={() => handleInputNumber('5')} />
+                    <CalculatorButton label="6" onPress={() => handleInputNumber('6')} />
+                    <CalculatorButton label="-" variant='operator' onPress={() => handleChooseOperator('-')} />
                 </View>
                 <View style={styles.row}>
-                    <CalculatorButton label="1" />
-                    <CalculatorButton label="2" />
-                    <CalculatorButton label="3" />
-                    <CalculatorButton label="+" variant='operator' />
+                    <CalculatorButton label="1" onPress={() => handleInputNumber('1')} />
+                    <CalculatorButton label="2" onPress={() => handleInputNumber('2')} />
+                    <CalculatorButton label="3" onPress={() => handleInputNumber('3')} />
+                    <CalculatorButton label="+" variant='operator' onPress={() => handleChooseOperator('+')} />
                 </View>
                 <View style={styles.row}>
-                    <CalculatorButton label="0" wide />
-                    <CalculatorButton label="." />
-                    <CalculatorButton label="=" variant='operator' />
+                    <CalculatorButton label="0" wide onPress={() => handleInputNumber('0')} />
+                    <CalculatorButton label="." onPress={handleInputDecimal} />
+                    <CalculatorButton label="=" variant='operator' onPress={handleResolveCalculation} />
                 </View>
             </View>
         </SafeAreaView>
