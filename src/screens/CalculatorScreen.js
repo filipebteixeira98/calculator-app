@@ -65,7 +65,7 @@ export function CalculatorScreen() {
         const currentValue = parseFloat(display);
 
         if (operator && storedValue !== null && !shouldResetDisplay) {
-            const result = calculate(storedValue, currentValue, operator);
+            const result = handleCalculate(storedValue, currentValue, operator);
 
             setDisplay(String(result));
             setStoredValue(typeof result === 'number' ? result : null);
@@ -82,7 +82,7 @@ export function CalculatorScreen() {
             return;
         }
 
-        const result = calculate(storedValue, parseFloat(display), operator);
+        const result = handleCalculate(storedValue, parseFloat(display), operator);
 
         setDisplay(String(result));
         setStoredValue(null);

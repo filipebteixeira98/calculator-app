@@ -8,6 +8,7 @@ export function CalculatorButton({
 }) {
     return (
         <Pressable
+            onPress={onPress}
             style={({ pressed }) => [
                 styles.button,
                 styles[variant],
