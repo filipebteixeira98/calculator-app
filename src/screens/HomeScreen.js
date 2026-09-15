@@ -55,4 +55,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: '700',
     },
-})
+    pressed: {
+        opacity: 0.65,
+    },
+});
