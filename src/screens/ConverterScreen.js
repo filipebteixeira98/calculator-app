@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { colors } from '../styles/colors';
 
