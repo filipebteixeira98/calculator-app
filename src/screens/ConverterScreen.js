@@ -122,7 +122,7 @@ export function ConverterScreen() {
                     <Text style={styles.resultUnit}>{selectedConversion.targetUnit}</Text>
                 </View>
                 <Pressable onPress={handleClearInput} style={({ pressed }) => [styles.clearButton, pressed && styles.pressed]}>
-                    <Text style={styles.clearButton}>Clear</Text>
+                    <Text style={styles.clearButtonText}>Clear</Text>
                 </Pressable>
             </ScrollView>
         </SafeAreaView>
