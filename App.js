@@ -19,10 +19,22 @@ export default function App() {
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
-        <Stack.Screen name="Calculator" component={CalculatorScreen} options={{ title: 'Calculator' }} />
-        <Stack.Screen name="Converter" component={ConverterScreen} options={{ title: 'Converter' }} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Home' }}
+        />
+        <Stack.Screen
+          name="Calculator"
+          component={CalculatorScreen}
+          options={{ title: 'Calculator' }}
+        />
+        <Stack.Screen
+          name="Converter"
+          component={ConverterScreen}
+          options={{ title: 'Converter' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
