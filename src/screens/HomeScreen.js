@@ -58,8 +58,8 @@ export function HomeScreen({ navigation }) {
             <Text style={styles.featuredDescription}>
               Basic operations with an iOS-inspired interface.
             </Text>
-            <Text style={styles.featuredAction}>Open</Text>
           </View>
+          <Text style={styles.featuredAction}>Open</Text>
         </Pressable>
         <View style={styles.sectionHeader}>
           <View>
@@ -188,6 +188,12 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   previewList: {
+    gap: 12,
+  },
+  previewCard: {
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: 16,
     borderWidth: 1,
     paddingHorizontal: 18,
     paddingVertical: 16,
