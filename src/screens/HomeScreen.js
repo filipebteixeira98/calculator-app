@@ -1,32 +1,99 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import { colors } from '../styles/colors';
 
+const converterPreviewItems = [
+  {
+    id: 'distance',
+    title: 'Distance',
+    description: 'Kilometers to meters',
+  },
+  {
+    id: 'time',
+    title: 'Time',
+    description: 'Minutes and hours',
+  },
+  {
+    id: 'currency',
+    title: 'Currency',
+    description: 'Dollar and Euro to Real',
+  },
+];
+
 export function HomeScreen({ navigation }) {
+  function handleOpenCalculator() {
+    navigation.navigate('Calculator');
+  }
+
+  function handleOpenConverter() {
+    navigation.navigate('Converter');
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>Calculator</Text>
-        <Text style={styles.subtitle}>
-          A simple calculator with interface inspired by iOS
-        </Text>
+      <ScrollView contentContainerStyle={styles.content}>
+        <View style={styles.header}>
+          <Text style={styles.eyebrow}>Old But Gold</Text>
+          <Text style={styles.title}>Calculator</Text>
+          <Text style={styles.subtitle}>
+            Fast tools for calculations and everyday unit conversions.
+          </Text>
+        </View>
         <Pressable
-          style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          onPress={() => navigation.navigate('Calculator')}
-        >
-          <Text style={styles.buttonText}>Open calculator</Text>
-        </Pressable>
-        <Pressable
+          onPress={handleOpenCalculator}
           style={({ pressed }) => [
-            styles.button,
-            styles.secondaryButton,
+            styles.featuredButton,
             pressed && styles.pressed,
           ]}
-          onPress={() => navigation.navigate('Converter')}
         >
-          <Text style={styles.buttonText}>Open converter</Text>
+          <View>
+            <Text style={styles.featuredTitle}>Standard Calculator</Text>
+            <Text style={styles.featuredDescription}>
+              Basic operations with an iOS-inspired interface.
+            </Text>
+            <Text style={styles.featuredAction}>Open</Text>
+          </View>
         </Pressable>
-      </View>
+        <View style={styles.sectionHeader}>
+          <View>
+            <Text style={styles.sectionTitle}>Converters</Text>
+            <Text style={styles.sectionSubtitle}>
+              Choose a quick conversion tool.
+            </Text>
+          </View>
+          <Pressable
+            onPress={handleOpenConverter}
+            style={({ pressed }) => [
+              styles.sectionAction,
+              pressed && styles.pressed,
+            ]}
+          >
+            <Text style={styles.sectionActionText}>View all</Text>
+          </Pressable>
+        </View>
+        <View style={styles.previewList}>
+          {converterPreviewItems.map((item) => (
+            <Pressable
+              key={item.id}
+              onPress={handleOpenConverter}
+              style={({ pressed }) => [
+                styles.previewCard,
+                pressed && styles.pressed,
+              ]}
+            >
+              <Text style={styles.previewTitle}>{item.title}</Text>
+              <Text style={styles.previewDescription}>{item.description}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -37,35 +104,104 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   content: {
-    flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 24,
+    paddingTop: 36,
+    paddingBottom: 32,
+  },
+  header: {
+    marginBottom: 28,
+  },
+  eyebrow: {
+    color: colors.operatorButton,
+    fontSize: 14,
+    fontWeight: '700',
+    letterSpacing: 0,
+    marginBottom: 8,
+    textTransform: 'uppercase',
   },
   title: {
     color: colors.text,
-    fontSize: 42,
+    fontSize: 44,
     fontWeight: '700',
-    marginBottom: 12,
+    marginBottom: 8,
   },
   subtitle: {
     color: colors.secondaryText,
     fontSize: 18,
     lineHeight: 26,
-    marginBottom: 32,
   },
-  button: {
+  featuredButton: {
     alignItems: 'center',
     backgroundColor: colors.operatorButton,
-    borderRadius: 16,
+    borderRadius: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
+  featuredTitle: {
+    color: colors.functionText,
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+  featuredDescription: {
+    color: colors.functionText,
+    fontSize: 15,
+    lineHeight: 21,
+    maxWidth: 220,
+    opacity: 0.8,
+  },
+  featuredAction: {
+    color: colors.functionText,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  sectionHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 14,
+  },
+  sectionTitle: {
+    color: colors.text,
+    fontSize: 24,
+    fontWeight: '700',
+  },
+  sectionSubtitle: {
+    color: colors.secondaryText,
+    fontSize: 15,
+    marginTop: 4,
+  },
+  sectionAction: {
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
+    borderRadius: 999,
+    borderWidth: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+  },
+  sectionActionText: {
+    color: colors.operatorButton,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  previewList: {
+    borderWidth: 1,
+    paddingHorizontal: 18,
     paddingVertical: 16,
   },
-  secondaryButton: {
-    marginTop: 12,
-  },
-  buttonText: {
-    color: colors.functionText,
-    fontSize: 17,
+  previewTitle: {
+    color: colors.text,
+    fontSize: 18,
     fontWeight: '700',
+    marginBottom: 6,
+  },
+  previewDescription: {
+    color: colors.secondaryText,
+    fontSize: 15,
+    lineHeight: 21,
   },
   pressed: {
     opacity: 0.65,
